@@ -1,0 +1,23 @@
+name: Gitleaks runner
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  gitleaks-scan:
+    name: Escaneo de fugas
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Ejecutar Gitleaks
+        uses: zricethezav/gitleaks-action@v2.3.9
+        with:
+          args: detect --source=.  
+
